@@ -49,3 +49,31 @@ def get_appid(game_name):
     matches = matches_start + matches_contain
 
     return matches
+
+def get_game_name(appid):
+    # Cargar los datos del archivo JSON
+    with open(archivo_juegos, 'r') as file:
+        data = json.load(file)
+
+    # Obtener la lista de juegos
+    games = data['applist']['apps']
+
+    # Buscar el nombre del juego con el appid dado
+    game_name = next((game['name'] for game in games if game['appid'] == int(appid)), 'Juego no encontrado')
+    file.close()
+    
+    return game_name
+
+def get_game_reviews(appid):
+    url_api_steam = f"https://store.steampowered.com/appreviews/{appid}?json=1&language=english&num_per_page=100"
+
+    response = requests.get(url_api_steam)
+    data = response.json()
+
+    if response.status_code == 200:
+        reviews = data['reviews']
+        n_reviews = data['query_summary']['total_reviews']
+        return reviews, n_reviews
+    else:
+        print("Error al obtener las reseñas del juego.")
+        return None

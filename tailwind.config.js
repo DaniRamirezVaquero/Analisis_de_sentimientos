@@ -11,7 +11,7 @@ module.exports = {
         primary: '#1b2838', // Azul oscuro
         secondary: '#2a475e', // Azul claro
         accent: '#66c0f4', // Azul claro
-        neutral: '#2a475e', // Gris azulado
+        neutral: '#c7d5e0', // blanco
         'base-100': '#c7d5e0', // Blanco
         info: '#3B82F6', // Azul claro
         success: '#22C55E', // Verde claro

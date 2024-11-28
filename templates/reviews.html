@@ -1,21 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reseñas del juego</title>
-    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
-    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet" />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
 </head>
+
 <body>
     <div id="main-container" class="flex flex-col gap-2 justify-center items-center w-full h-screen">
-        <div id="main-box" class="flex flex-col bg-primary rounded-box p-6 w-1/2 max-h-screen">
+        <div id="main-box" class="flex flex-col gap-3 bg-primary rounded-box p-6 w-1/2 max-h-screen">
             <header id="main-box-title" class="text-2xl flex justify-between">
-                <p>Reseñas del juego con appid: {{ appid }}</p>
+                <p>Analisis de reviews de {{ name }}</p>
             </header>
-            <!-- Aquí puedes agregar el código para mostrar las reseñas del juego -->
-          </div>
-          <a href="/" class="btn btn-neutral w-1/2">Volver</a>
+            <section class="w-full h-72 max-h-72 bg-secondary rounded-box p-2 overflow-x-auto font-mono">
+                {% for review in reviews %}
+                <div class="flex flex-col p-2">
+                    <p><span class="font-bold">ID del usuario:</span> {{ review.author.steamid }}</p>
+                    
+                    {% if review.voted_up %}
+                    <p><span class="font-bold">Voto Steam:</span> <span class="text-success"> Positivo</span></p>
+                    {% else %}
+                    <p><span class="font-bold">Voto Steam:</span><span class="text-error"> Negativo</span></p>
+                    {% endif %}
+                    
+                    {% if review.sentiment.label == 'POSITIVE'%}
+                    <p><span class="font-bold">Sentimiento:</span> <span class="text-success"> Positivo</span></p>
+                    {% elif review.sentiment.label == 'NEGATIVE'%}
+                    <p><span class="font-bold">Sentimiento:</span> <span class="text-error"> Negativo</span></p>
+                    {% else %}
+                    <p><span class="font-bold">Sentimiento:</span> <span class="text-warning"> Neutro</span></p>
+                    {% endif %}
+
+                    <p><span class="font-bold">Review:</span> {{review.review}}</p>
+                </div>
+                {% if not loop.last %}
+                <div class="divider"></div>
+                {% endif %}
+                {% endfor %}
+            </section>
+
+            <section>
+                <p><span class="font-bold">Total de reviews:</span> {{ reviews|length }}</p>
+                <div class="tooltip" 
+                data-tip="El sentimiento general se calcula contando cuantas reseñas son analizadas
+                con cada sentimiento y calculando la media usando el 'score' como peso.">
+                    <p><span class="font-bold">Sentimiento general:</span> {{avg_sent}}</p>
+                </div>
+            </section>
+        </div>
+        <a href="/" class="btn btn-neutral w-1/2">Volver</a>
     </div>
 </body>
+
 </html>

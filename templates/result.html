@@ -15,7 +15,13 @@
             </header>
             <ul class="mt-4">
                 {% for match in matches %}
-                    <li class='mt-2'><a class="link link-hover" href="/reviews/{{match.appid}}">{{ match.name }}</a></li>
+                <li class='mt-2'>
+                    <form action="/reviews" method="post">
+                        <input type="hidden" name="appid" value="{{ match.appid }}">
+                        <input type="hidden" name="name" value="{{ match.name }}">
+                        <button type="submit" class="link link-hover">{{ match.name }}</button>
+                    </form>
+                </li>
                 {% endfor %}
             </ul>
             
