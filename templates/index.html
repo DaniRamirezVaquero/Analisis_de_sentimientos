@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game reviews sentiment analyzer</title>
+  <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+  <div id="main-container" class="flex justify-center items-center w-100 h-dvh">
+    <div id="main-box" class="flex flex-col bg-primary rounded-box p-6 w-1/2 max-h-[90vh] shadow-md">
+
+      <header id="main-box-tittle" class="text-2xl flex justify-between">
+        <p>Analizador de sentimientos de reviews de juegos de Steam</p>
+        <img class="w-8 h-8" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/512px-Steam_icon_logo.svg.png" alt="steam-logo">
+      </header>
+
+      <div class="divider w-100"></div>
+
+      <section class="w-100">
+        <div class="grid grid-cols-2 gap-2">
+            <form action="/search-appid" method="post">
+            <label class="input input-bordered flex items-center gap-2">
+              <input type="text" class="grow" placeholder="Buscar por nombre" name="game_name"/>
+              <button type="submit" class="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  class="h-4 w-4 opacity-70">
+                  <path
+                    fill-rule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+            </label>
+          </form>
+          <form action="/reviews" method="get">
+            <label class="input input-bordered flex items-center gap-2">
+              <input type="text" class="grow" placeholder="Buscar por appid" name="appid"/>
+              <button type="submit" class="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  class="h-4 w-4 opacity-70">
+                  <path
+                    fill-rule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                    clip-rule="evenodd" />
+                </svg>
+              </button>
+            </label>
+          </form>
+          </div>
+      </section>
+
+    </div>
+  </div>
+</body>
+</html>

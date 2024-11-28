@@ -1,0 +1,4 @@
+node_modules
+*.pyc
+__pycache__
+__pycache__/steam_api.cpython-312.pyc
