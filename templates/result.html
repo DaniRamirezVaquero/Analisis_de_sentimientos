@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de la búsqueda</title>
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <div id="main-container" class="flex flex-col gap-2 justify-center items-center w-full h-screen">
+        <div id="main-box" class="flex flex-col bg-primary rounded-box p-6 w-1/2 max-h-[80vh] overflow-y-auto">
+            <header id="main-box-title" class="text-2xl flex justify-between">
+                <p>Resultados de la búsqueda para "{{ game_name }}"</p>
+            </header>
+            <ul class="mt-4">
+                {% for match in matches %}
+                    <li class='mt-2'><a class="link link-hover" href="/reviews/{{match.appid}}">{{ match.name }}</a></li>
+                {% endfor %}
+            </ul>
+            
+        </div>
+        <a href="/" class="btn btn-neutral w-1/2">Volver</a>
+    </div>
+</body>
+</html>
