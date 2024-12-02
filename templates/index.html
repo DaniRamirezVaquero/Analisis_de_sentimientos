@@ -13,7 +13,7 @@
 
       <header id="main-box-tittle" class="text-2xl flex justify-between">
         <p>Analizador de sentimientos de reviews de juegos de Steam</p>
-        <img class="w-8 h-8" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/512px-Steam_icon_logo.svg.png" alt="steam-logo">
+        <img class="w-8 h-8 drop-shadow" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/512px-Steam_icon_logo.svg.png" alt="steam-logo">
       </header>
 
       <div class="divider w-100"></div>
@@ -59,5 +59,27 @@
 
     </div>
   </div>
+
+<button class="btn hidden" id="open-modal-btn" onclick="my_modal_1.showModal()">open modal</button>
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">No se han encontrado reviews</h3>
+    <p class="py-4">El juego {{name}}({{appid}}) no tiene reviews en steam, asegurate de que no has seleccionado un dlc o una key.</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Buscar otro juego</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+{% if no_reviews %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('open-modal-btn').click();
+  });
+</script>
+{% endif %}
 </body>
 </html>
