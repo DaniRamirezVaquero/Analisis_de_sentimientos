@@ -26,6 +26,9 @@ def reviews():
         name = get_game_name(appid)
         
     reviews, n_reviews = get_game_reviews(appid)
+    
+    if (n_reviews == 0):
+        return render_template('index.html', no_reviews=True, appid=appid, name=name)
 
     # Analizar cada reseña
     for review in reviews:
